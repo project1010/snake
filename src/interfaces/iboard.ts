@@ -7,8 +7,8 @@ export interface IBoard {
     width: number,
     size:number,
     food: IFood,
-    drawSnake():void,
-    drawFood(food: any):void,
+    drawSnake(isFoodEaten : boolean):void,
+    drawFood(x: number, y: number):void,
     drawScore():void,
     init():void
 }

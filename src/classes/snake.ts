@@ -66,15 +66,15 @@ export class Snake implements ISnake{
     }
 
     eatFood(food:IPosition): boolean{
+        console.log(food);
         let head:IPosition = this.cells[0];
+        console.log(head);
 
         if(food.x == head.x && food.y == head.y){
             return true;
         } else {
             return false;
         }
-
-
     }
     checkCollision(): boolean{
         var x = this.cells[0].x;

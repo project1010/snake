@@ -19,13 +19,20 @@ function init(): void {
     let painter = new Painter(canvas);
     var snake = new Snake(5, 'green', 'darkgreen');
     var food = new Food();
-    var board = new Board(painter, snake, food, 350, 350, 10);
+    var board = new Board(painter, snake, food, 500, 500, 50);
     board.init();
 
     gameLoop = setInterval(function () {
         board.init();
         snake.move();
 
+        if(snake.eatFood(food.position)){
+           // alert("Collision")
+            food.createFood();
+            //snake = new Snake(6, 'green', 'darkgreen');
+            board.drawSnake(true);        
+            board.drawFood(1,1);
+        };
 
         if(board.checkBoundary()){
             gameLoop = clearInterval(gameLoop);
@@ -35,8 +42,8 @@ function init(): void {
             let keyCode:number = event.keyCode;
             snake.changeDirection(keyCode)
         }
-        board.drawSnake();
-        board.drawFood();
-    }, 150)
+        board.drawSnake(false);
+        board.drawFood(1,1);
+    }, 250)
 }
 

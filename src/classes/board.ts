@@ -18,7 +18,7 @@ export class Board implements IBoard{
         this.snake = snake;
         this.food = food;
     }
-    drawSnake():void{
+    drawSnake(isFoodEaten:boolean):void{
         for (var i = 0; i < this.snake.cells.length; i++) {
             var cell = this.snake.cells[i];
             if(i==0){
@@ -26,7 +26,6 @@ export class Board implements IBoard{
             } else {
                 this.drawSnakeCell(cell.x, cell.y, false);
             }
-
         }
     }
     drawSnakeCell(x:number, y:number, isHead:boolean){
@@ -38,9 +37,9 @@ export class Board implements IBoard{
             this.painter.strokeArea(x*this.size, y*this.size, this.size, this.size, "darkgreen");
         }
     }
-    drawFood():void{
-        this.painter.fillArea(this.food.position.x*this.size, this.food.position.y*this.size, this.size, this.size, "pink");
-        this.painter.strokeArea(this.food.position.x*this.size, this.food.position.y*this.size, this.size, this.size, "yellow");
+    drawFood(x:number, y:number):void{
+        this.painter.fillArea(this.food.position.x*this.size, this.food.position.y*this.size, this.size, this.size, "yellow");
+        this.painter.strokeArea(this.food.position.x*this.size, this.food.position.y*this.size, this.size, this.size, "black");
 
     }
     drawScore():void{
