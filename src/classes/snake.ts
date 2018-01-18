@@ -8,14 +8,22 @@ export class Snake implements ISnake{
     bodyColor: string;
     borderColor: string;
     direction: Direction;
+    isFoodEaten : boolean;
+    startX : number;
     length: number;
-    constructor(_length:number, _bodyColor:string, _borderColor: string){
+    constructor(_length:number, _bodyColor:string, _borderColor: string, _isFoodEaten: boolean){
         this.cells = [];
         this.length = _length;
         this.bodyColor = _bodyColor;
         this.borderColor = _borderColor;
         this.direction = Direction.Down;
-        for(let i=0;i<_length;i++){
+        this.isFoodEaten = _isFoodEaten;
+        this.startX = 0;
+        console.log(this.isFoodEaten);
+        /* if(this.isFoodEaten){
+            this.startX = 5;    
+        }; */
+        for(let i = this.startX ; i < _length ; i++){
             this.cells.push({x: i, y: 0});
         }
     }
@@ -25,23 +33,27 @@ export class Snake implements ISnake{
             case 37:
                 if (this.direction != Direction.Right) {
                     this.direction = Direction.Left;
+                    //this.checkCollision();                    
                 }
                 break;
             case 39:
                 if (this.direction != Direction.Left) {
                     this.direction = Direction.Right;
+                    //this.checkCollision();                    
                 }
                 break;
 
             case 38:
                 if (this.direction != Direction.Down) {
                     this.direction = Direction.Up;
+                    //this.checkCollision();                    
                 }
                 break;
 
             case 40:
                 if (this.direction != Direction.Up) {
                     this.direction = Direction.Down;
+                    //this.checkCollision();                    
                 }
                 break;
         }
@@ -66,10 +78,7 @@ export class Snake implements ISnake{
     }
 
     eatFood(food:IPosition): boolean{
-        console.log(food);
         let head:IPosition = this.cells[0];
-        console.log(head);
-
         if(food.x == head.x && food.y == head.y){
             return true;
         } else {
@@ -77,11 +86,13 @@ export class Snake implements ISnake{
         }
     }
     checkCollision(): boolean{
-        var x = this.cells[0].x;
-        var y = this.cells[0].y;
-        for(var i = 0; i < this.cells.length; i++) {
+        let head:IPosition = this.cells[0];        
+       // var x = this.cells[0].x;
+       // var y = this.cells[0].y;
+        for(var i = 1; i < this.cells.length; i++) {
             var cell = this.cells[i];
-            if(cell.x === x && cell.y === y)
+            console.log(cell);
+            if(cell.x === head.x && cell.y === head.y)
                 return true;
         }
         return false;

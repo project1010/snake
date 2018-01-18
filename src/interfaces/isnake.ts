@@ -7,7 +7,7 @@ export interface ISnake{
     borderColor: string,
     direction: Direction,
     length: number,
-    move():void,
+    move(foodPosition:IPosition):void,
     eatFood(foodPosition:IPosition):boolean,
     changeDirection(keyCode:number):void,
     checkCollision(): boolean,

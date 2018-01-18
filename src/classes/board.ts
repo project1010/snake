@@ -10,6 +10,7 @@ export class Board implements IBoard{
     width: number;
     size:number;
     food: IFood;
+    private score : number = 0;
     constructor(painter: IPainter,snake: ISnake, food: IFood,h:number, w:number, s:number){
         this.height = h;
         this.width = w;
@@ -18,7 +19,7 @@ export class Board implements IBoard{
         this.snake = snake;
         this.food = food;
     }
-    drawSnake(isFoodEaten:boolean):void{
+    drawSnake():void{
         for (var i = 0; i < this.snake.cells.length; i++) {
             var cell = this.snake.cells[i];
             if(i==0){
@@ -37,13 +38,14 @@ export class Board implements IBoard{
             this.painter.strokeArea(x*this.size, y*this.size, this.size, this.size, "darkgreen");
         }
     }
-    drawFood(x:number, y:number):void{
+    drawFood():void{
         this.painter.fillArea(this.food.position.x*this.size, this.food.position.y*this.size, this.size, this.size, "yellow");
         this.painter.strokeArea(this.food.position.x*this.size, this.food.position.y*this.size, this.size, this.size, "black");
 
     }
     drawScore():void{
-
+        this.score++;
+        document.getElementById("score").innerHTML = '<b>Score:' + this.score + '</b>';
     }
     checkBoundary(): boolean{
         return this.snake.checkBoundary(-1,  this.width/this.size,-1, this.height/this.size);
