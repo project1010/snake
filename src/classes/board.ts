@@ -11,6 +11,8 @@ export class Board implements IBoard{
     size:number;
     food: IFood;
     private score : number = 0;
+    private highestScore : number = Number(localStorage.getItem("highScore"));
+    //private highestScore : number = 100;
     constructor(painter: IPainter,snake: ISnake, food: IFood,h:number, w:number, s:number){
         this.height = h;
         this.width = w;
@@ -31,27 +33,37 @@ export class Board implements IBoard{
     }
     drawSnakeCell(x:number, y:number, isHead:boolean){
         if(isHead){
-            this.painter.fillArea(x*this.size, y*this.size, this.size, this.size, "red");
-            this.painter.strokeArea(x*this.size, y*this.size, this.size, this.size, "darkgreen");
+            this.painter.fillArea(x*this.size, y*this.size, this.size, this.size, "orange");
+            this.painter.strokeArea(x*this.size, y*this.size, this.size, this.size, "black");
         } else {
-            this.painter.fillArea(x*this.size, y*this.size, this.size, this.size, "green");
-            this.painter.strokeArea(x*this.size, y*this.size, this.size, this.size, "darkgreen");
+            this.painter.fillArea(x*this.size, y*this.size, this.size, this.size, "#4c0202");
+            this.painter.strokeArea(x*this.size, y*this.size, this.size, this.size, "black");
         }
     }
     drawFood():void{
-        this.painter.fillArea(this.food.position.x*this.size, this.food.position.y*this.size, this.size, this.size, "yellow");
+        this.painter.fillArea(this.food.position.x*this.size, this.food.position.y*this.size, this.size, this.size, "#07f20b");
         this.painter.strokeArea(this.food.position.x*this.size, this.food.position.y*this.size, this.size, this.size, "black");
 
     }
     drawScore():void{
         this.score++;
-        document.getElementById("score").innerHTML = '<b>Score:' + this.score + '</b>';
+        if(this.score > this.highestScore){
+            localStorage.setItem("highScore", JSON.stringify(this.score));
+            this.highestScore = this.score;
+        }
+        document.getElementById("score").innerHTML  =   '<p><b>Score : ' + this.score + '</b></p>'                                                        
     }
+
+    showHighScore():void{
+        document.getElementById("higestscore").innerHTML  =  '<p><b>Higest Score : ' + this.highestScore + '</p>';
+        document.getElementById("score").innerHTML  =   '<p><b>Score : ' + this.score + '</b></p>';                                                                        
+    }
+
     checkBoundary(): boolean{
         return this.snake.checkBoundary(-1,  this.width/this.size,-1, this.height/this.size);
     }
     init():void{
-        this.painter.fillArea(0, 0, this.width, this.height, "lightgrey")
+        this.painter.fillArea(0, 0, this.width, this.height, "lightblue")
         this.painter.strokeArea(0, 0, this.width, this.height,"black")
     }
 }

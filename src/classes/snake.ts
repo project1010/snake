@@ -18,12 +18,7 @@ export class Snake implements ISnake{
         this.borderColor = _borderColor;
         this.direction = Direction.Down;
         this.isFoodEaten = _isFoodEaten;
-        this.startX = 0;
-        console.log(this.isFoodEaten);
-        /* if(this.isFoodEaten){
-            this.startX = 5;    
-        }; */
-        for(let i = this.startX ; i < _length ; i++){
+        for(let i = 0 ; i < _length ; i++){
             this.cells.push({x: i, y: 0});
         }
     }
@@ -33,27 +28,23 @@ export class Snake implements ISnake{
             case 37:
                 if (this.direction != Direction.Right) {
                     this.direction = Direction.Left;
-                    //this.checkCollision();                    
                 }
                 break;
             case 39:
                 if (this.direction != Direction.Left) {
                     this.direction = Direction.Right;
-                    //this.checkCollision();                    
                 }
                 break;
 
             case 38:
                 if (this.direction != Direction.Down) {
                     this.direction = Direction.Up;
-                    //this.checkCollision();                    
                 }
                 break;
 
             case 40:
                 if (this.direction != Direction.Up) {
                     this.direction = Direction.Down;
-                    //this.checkCollision();                    
                 }
                 break;
         }
@@ -78,20 +69,22 @@ export class Snake implements ISnake{
     }
 
     eatFood(food:IPosition): boolean{
-        let head:IPosition = this.cells[0];
+        let head : IPosition = this.cells[0];
+        //store position of last cell
+        let lastCell : IPosition = this.cells[this.cells.length - 1];
         if(food.x == head.x && food.y == head.y){
+            //pushed last cell again as one new cell;
+            this.cells.push({x:lastCell.x, y:lastCell.y});
             return true;
         } else {
             return false;
         }
     }
     checkCollision(): boolean{
-        let head:IPosition = this.cells[0];        
-       // var x = this.cells[0].x;
-       // var y = this.cells[0].y;
+        let head:IPosition = this.cells[0];
+        //initialize i from 1 because we want to exclude head's (x,y) position
         for(var i = 1; i < this.cells.length; i++) {
             var cell = this.cells[i];
-            console.log(cell);
             if(cell.x === head.x && cell.y === head.y)
                 return true;
         }

@@ -1,3 +1,33 @@
+body {
+    font-family: 'Titillium Web', sans-serif !important;
+}
+
 .border-canvas{
     border: 25px solid #71092d !important;
 }
+
+.pull-left {
+    float:left;
+}
+
+.padding-16{
+    padding: 16px !important;
+}
+
+.container {
+    display: table;
+    width:100%;
+    height: 550px;
+}
+          
+input[type=button] {    
+    display: block;
+    width: 50%;
+    margin: 0 auto;
+}
+          
+.button-wrapper {
+    display: table-cell;
+    vertical-align: middle;
+}
+  
