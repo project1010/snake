@@ -19,6 +19,7 @@ let gameLoop:any;
 
 function init(): void {
     document.getElementById("main").style.display = "block";
+    document.getElementById("logo").style.display = "none";
     startButton.setAttribute('disabled', true);
     let painter = new Painter(canvas);
     var snake = new Snake(5, 'green', 'darkgreen', false);
@@ -41,7 +42,7 @@ function init(): void {
 
         //If snake bites its own tail!
         if(snake.checkCollision()){
-            alert("Game over");
+            alert("You bite on your own tail, Game over");
             location.reload();
         }
         
@@ -55,6 +56,6 @@ function init(): void {
         }
         board.drawSnake();
         board.drawFood();
-    }, 250)
+    }, 350)
 }
 

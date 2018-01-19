@@ -22,8 +22,9 @@ body {
           
 input[type=button] {    
     display: block;
-    width: 50%;
+    width: 20%;
     margin: 0 auto;
+    font-size: 20px;
 }
           
 .button-wrapper {
@@ -31,3 +32,6 @@ input[type=button] {
     vertical-align: middle;
 }
   
+.width-250{
+    width:250px;
+}

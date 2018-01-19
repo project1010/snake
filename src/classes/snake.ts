@@ -83,7 +83,7 @@ export class Snake implements ISnake{
     checkCollision(): boolean{
         let head:IPosition = this.cells[0];
         //initialize i from 1 because we want to exclude head's (x,y) position
-        for(var i = 1; i < this.cells.length; i++) {
+        for(var i = 2; i < this.cells.length; i++) {
             var cell = this.cells[i];
             if(cell.x === head.x && cell.y === head.y)
                 return true;
